@@ -23,6 +23,8 @@ test {
     testLogging { exceptionFormat = 'full' }
 }
 
+mainClassName = 'dummy'
+
 jar {
     manifest {
         attributes(

@@ -2,7 +2,7 @@
 
 # Simple Aes GCM
 
-A small library that provides **simple** Aes GCM `encrypt` / `decrypt` functions. Here simple means that:
+A small Kotlin library that provides **simple** Aes GCM `encrypt` / `decrypt` functions. Here simple means that:
 
 - Uses sensible initialization vector (IV) size - 12 bytes. 
 - Uses sensible tag length - 128 bits 
