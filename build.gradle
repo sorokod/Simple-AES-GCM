@@ -1,0 +1,25 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+    id 'application'
+}
+group = 'org.xor'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+    testCompile 'org.junit.jupiter:junit-jupiter:5.7.0'
+}
+compileKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging { exceptionFormat = 'full' }
+}
+//application {
+//    mainClassName = 'MainKt'
+//}
