@@ -7,40 +7,54 @@ import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
 
-/**
- * Provides sensible defaults for AES GCM so that encryption / decryption can be done with a single
- * function call
- *
- * https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf
- *
- *
- **/
-
 private const val AES_MODE = "AES/GCM/NoPadding"
 private const val AES = "AES"
 
+/**
+ * [AesGCM] provides simple ergonomics for AES GCM so that encryption and decryption can be done with a single
+ * function call.
+ *
+ *
+ * See also: [Recommendation for Block Cipher Modes of Operation GCM and GMAC](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf)
+ *
+ *
+ * @author David Soroko
+ */
 class AesGCM(val profile: AesProfile = Base()) {
 
     /**
-     * Valid sizes for secret key in bytes: 16, 24, or 32
+     * Encrypts using AES GCM
+     *
+     * @param secretKey  The secret key to use for encryption, only valid sizes are: 16, 24 and 32 bytes
+     * @param plaintext  The content to be encrypted
+     *
+     * @return - an instance of [AesPayload]
      */
-    fun encrypt(key: ByteArray, data: ByteArray): AesPayload {
+    fun encrypt(secretKey: ByteArray, plaintext: ByteArray): AesPayload {
         val spec = GCM_parameterSpec()
 
         val cipher = Cipher.getInstance(AES_MODE).also {
-            val sk = SecretKeySpec(key, AES)
+            val sk = SecretKeySpec(secretKey, AES)
             it.init(ENCRYPT_MODE, sk, spec)
         }
 
-        return AesPayload(iv = spec.iv, ciphertext = cipher.doFinal(data))
+        return AesPayload(iv = spec.iv, ciphertext = cipher.doFinal(plaintext))
     }
 
-    fun decrypt(key: ByteArray, data: AesPayload): ByteArray = Cipher.getInstance(AES_MODE).let {
-        val sk = SecretKeySpec(key, AES)
-        val spec = GCM_parameterSpec(data.iv)
+    /**
+     * Decrypts using AES GCM
+     *
+     * @param secretKey  The secret key that was used to encrypt the payload
+     * @param payload  The payload to be decrypted.
+     *
+     * @return - the plaintext as a [ByteArray]
+     */
+    fun decrypt(secretKey: ByteArray, payload: AesPayload): ByteArray = Cipher.getInstance(AES_MODE).let {
+        val sk = SecretKeySpec(secretKey, AES)
+        val spec = GCM_parameterSpec(payload.iv)
         it.init(DECRYPT_MODE, sk, spec)
 
-        it.doFinal(data.ciphertext)
+        it.doFinal(payload.ciphertext)
     }
 
     /**
@@ -59,7 +73,12 @@ class AesGCM(val profile: AesProfile = Base()) {
 
 
 /**
- * Wraps the result of an encryption: the iv and the ciphertext.
+ * [AesPayload] is a wrapper for the output of [AesGCM.encrypt]. It wraps the resulting iv and ciphertext.
+ *
+ * @param iv The IV that was used for the encryption
+ * @param ciphertext The encrypted ciphertext
+ *
+ * @author David Soroko
  */
 class AesPayload(val iv: ByteArray, val ciphertext: ByteArray)
 
