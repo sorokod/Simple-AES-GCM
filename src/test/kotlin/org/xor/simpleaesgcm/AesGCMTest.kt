@@ -3,17 +3,18 @@ package org.xor.simpleaesgcm
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
+import org.xor.simpleaesgcm.SecureRandomBytes.generate
 
 internal class AesGCMTest {
 
     companion object {
-        private val key16 = randomBytes(16)
-        private val key24 = randomBytes(24)
-        private val key32 = randomBytes(32)
+        private val key16 = generate(16)
+        private val key24 = generate(24)
+        private val key32 = generate(32)
 
-        private val data16 = (15..17).map { i -> randomBytes(i) }
-        private val data32 = (31..33).map { i -> randomBytes(i) }
-        private val data48 = (47..49).map { i -> randomBytes(i) }
+        private val data16 = (15..17).map { i -> generate(i) }
+        private val data32 = (31..33).map { i -> generate(i) }
+        private val data48 = (47..49).map { i -> generate(i) }
 
         @JvmStatic
         fun keysAndItems() = arrayOf(

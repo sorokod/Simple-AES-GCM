@@ -6,10 +6,6 @@ import javax.crypto.Cipher.ENCRYPT_MODE
 import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
-
-private const val AES_MODE = "AES/GCM/NoPadding"
-private const val AES = "AES"
-
 /**
  * [AesGCM] provides simple ergonomics for AES GCM so that encryption and decryption can be done with a single
  * function call.
@@ -20,7 +16,10 @@ private const val AES = "AES"
  *
  * @author David Soroko
  */
-class AesGCM(val profile: AesProfile = Base()) {
+private const val AES_MODE = "AES/GCM/NoPadding"
+private const val AES = "AES"
+
+class AesGCM(val profile: AesProfile = Base(), private val randomBytes: RandomBytes = SecureRandomBytes) {
 
     /**
      * Encrypts using AES GCM
@@ -65,7 +64,7 @@ class AesGCM(val profile: AesProfile = Base()) {
      * https://crypto.stackexchange.com/questions/26783/ciphertext-and-tag-size-and-iv-transmission-with-aes-in-gcm-mode
      */
     private fun GCM_parameterSpec(): GCMParameterSpec =
-        GCMParameterSpec(profile.tagLengthInBits, randomBytes(profile.ivLengthInBytes))
+        GCMParameterSpec(profile.tagLengthInBits, randomBytes.generate(profile.ivLengthInBytes))
 
     private fun GCM_parameterSpec(iv: ByteArray): GCMParameterSpec =
         GCMParameterSpec(profile.tagLengthInBits, iv)
