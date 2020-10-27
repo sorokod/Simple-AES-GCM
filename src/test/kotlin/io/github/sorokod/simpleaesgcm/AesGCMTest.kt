@@ -1,9 +1,9 @@
-package org.xor.simpleaesgcm
+package io.github.sorokod.simpleaesgcm
 
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.xor.simpleaesgcm.SecureRandomBytes.generate
+import io.github.sorokod.simpleaesgcm.SecureRandomBytes.generate
 
 internal class AesGCMTest {
 

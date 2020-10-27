@@ -1,7 +1,7 @@
-package org.xor.simpleaesgcm
+package io.github.sorokod.simpleaesgcm
 
-import org.xor.simpleaesgcm.Conversions.base64ToBytes
-import org.xor.simpleaesgcm.Conversions.bytesToBase64
+import io.github.sorokod.simpleaesgcm.Conversions.base64ToBytes
+import io.github.sorokod.simpleaesgcm.Conversions.bytesToBase64
 
 interface Serializer<T> {
     fun serialize(aesPayload: AesPayload): T

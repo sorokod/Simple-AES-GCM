@@ -1,4 +1,4 @@
-package org.xor.simpleaesgcm
+package io.github.sorokod.simpleaesgcm
 
 import javax.crypto.Cipher
 import javax.crypto.Cipher.DECRYPT_MODE
@@ -6,19 +6,17 @@ import javax.crypto.Cipher.ENCRYPT_MODE
 import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
+private const val AES_MODE = "AES/GCM/NoPadding"
+private const val AES = "AES"
+
 /**
- * [AesGCM] provides simple ergonomics for AES GCM so that encryption and decryption can be done with a single
- * function call.
+ * [AesGCM] provides simple ergonomics for AES GCM. Encryption and decryption are done with a single function call.
  *
  *
  * See also: [Recommendation for Block Cipher Modes of Operation GCM and GMAC](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf)
  *
- *
  * @author David Soroko
  */
-private const val AES_MODE = "AES/GCM/NoPadding"
-private const val AES = "AES"
-
 class AesGCM(val profile: AesProfile = Base(), private val randomBytes: RandomBytes = SecureRandomBytes) {
 
     /**

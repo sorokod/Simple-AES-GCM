@@ -1,4 +1,4 @@
-package org.xor.simpleaesgcm
+package io.github.sorokod.simpleaesgcm
 
 import java.security.SecureRandom
 

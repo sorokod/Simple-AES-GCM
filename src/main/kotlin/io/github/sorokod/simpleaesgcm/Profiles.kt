@@ -1,4 +1,4 @@
-package org.xor.simpleaesgcm
+package io.github.sorokod.simpleaesgcm
 
 /**
  * [AesProfile] is used to parametrise instances of [AesGCM]. Generally the (default) [Base] class should be used.

@@ -1,11 +1,11 @@
-package org.xor.simpleaesgcm
+package io.github.sorokod.simpleaesgcm
 
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.xor.simpleaesgcm.Base64Serializer.deserialize
-import org.xor.simpleaesgcm.Base64Serializer.serialize
-import org.xor.simpleaesgcm.SecureRandomBytes.generate
+import io.github.sorokod.simpleaesgcm.Base64Serializer.deserialize
+import io.github.sorokod.simpleaesgcm.Base64Serializer.serialize
+import io.github.sorokod.simpleaesgcm.SecureRandomBytes.generate
 
 internal class Base64SerializerTest {
 

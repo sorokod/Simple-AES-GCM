@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.dokka") version "1.4.10.2"
     id 'application'
 }
-group = 'org.xor'
+group = 'io.github.sorokod'
 version = '1.0.1-SNAPSHOT'
 
 repositories {

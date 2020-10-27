@@ -1,8 +1,8 @@
-package org.xor.simpleaesgcm
+package io.github.sorokod.simpleaesgcm
 
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.xor.simpleaesgcm.Conversions.hexToBytes
+import io.github.sorokod.simpleaesgcm.Conversions.hexToBytes
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
