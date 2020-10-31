@@ -3,7 +3,7 @@ package io.github.sorokod.simpleaesgcm
 import java.util.*
 
 /**
- * Utilities for converting byte arrays to - hex and base 64 strings
+ * Utilities for converting byte arrays <-> hex and base 64 strings
  */
 object Conversions {
 
