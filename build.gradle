@@ -1,10 +1,23 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.13.0'
+        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.10.2'
+    }
+}
+
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.4.10'
     id("org.jetbrains.dokka") version "1.4.10.2"
-    id 'application'
 }
+
+
+apply plugin: "com.vanniktech.maven.publish"
+
 group = 'io.github.sorokod'
-version = '1.0.1-SNAPSHOT'
+version = '1.0.1'
 
 repositories {
     mavenCentral()
@@ -23,13 +36,21 @@ test {
     testLogging { exceptionFormat = 'full' }
 }
 
-mainClassName = 'dummy'
+mavenPublish {
+    targets {
+        uploadArchives {
+            releaseRepositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            snapshotRepositoryUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+            repositoryUsername = null
+            repositoryPassword = null
+        }
 
-jar {
-    manifest {
-        attributes(
-                'Implementation-Title': project.name,
-                'Implementation-Version': project.version
-        )
+//        installArchives {
+//            // Configure as above.
+//        }
+
+//        internalRepo {
+//            // Configure as above.
+//        }
     }
 }
